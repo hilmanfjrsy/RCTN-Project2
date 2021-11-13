@@ -15,6 +15,19 @@ export async function getRequest(path) {
   }
 }
 
+export async function postRequest(path,data) {
+  try {
+    const response = await axios.post('https://fakestoreapi.com/' + path, data);
+    if (response) {
+      return response;
+    }
+  } catch (error) {
+    toast.error(error.message, {
+      theme: "colored"
+    })
+  }
+}
+
 export const getRating = (total = 0, count = 0, fontSize = 10) => {
   function getValue(value) {
     switch (value) {
