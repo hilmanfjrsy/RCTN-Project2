@@ -68,6 +68,7 @@ export const getRating = (total = 0, count = 0, fontSize = 10) => {
 
   return (
     <div>
+      <span style={{ fontSize:fontSize+3,fontWeight:'bold',marginRight:5, color: GlobalVar.goldColor }}>{total}</span>
       {getStars(total).map((value, idx) => {
         return (
           <li key={idx} className="list-inline-item m-0">
