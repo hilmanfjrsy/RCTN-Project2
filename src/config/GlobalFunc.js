@@ -4,27 +4,27 @@ import { GlobalVar } from "./GlobalVar";
 
 export async function getRequest(path) {
   try {
-    const response = await axios.get('https://fakestoreapi.com/' + path);
+    const response = await axios.get("https://fakestoreapi.com/" + path);
     if (response) {
       return response;
     }
   } catch (error) {
     toast.error(error.message, {
-      theme: "colored"
-    })
+      theme: "colored",
+    });
   }
 }
 
-export async function postRequest(path,data) {
+export async function postRequest(path, data) {
   try {
-    const response = await axios.post('https://fakestoreapi.com/' + path, data);
+    const response = await axios.post("https://fakestoreapi.com/" + path, data);
     if (response) {
       return response;
     }
   } catch (error) {
     toast.error(error.message, {
-      theme: "colored"
-    })
+      theme: "colored",
+    });
   }
 }
 
@@ -72,17 +72,25 @@ export const getRating = (total = 0, count = 0, fontSize = 10) => {
       {getStars(total).map((value, idx) => {
         return (
           <li key={idx} className="list-inline-item m-0">
-            <i className={getValue(value)} style={{ fontSize, color: GlobalVar.goldColor }}></i>
+            <i
+              className={getValue(value)}
+              style={{ fontSize, color: GlobalVar.goldColor }}
+            ></i>
           </li>
         );
       })}
-      <span style={{ fontSize, color: GlobalVar.greyColor, marginLeft: 5 }}>({count})</span>
+      <span style={{ fontSize, color: GlobalVar.greyColor, marginLeft: 5 }}>
+        ({count})
+      </span>
     </div>
   );
 };
 
 export default function Loading() {
-  return <>
-    <span class="spinner-border spinner-border-sm" aria-hidden="true" />&nbsp;&nbsp;
-  </>
+  return (
+    <>
+      <span class="spinner-border spinner-border-sm" aria-hidden="true" />
+      &nbsp;&nbsp;
+    </>
+  );
 }

@@ -1,9 +1,9 @@
 :root {
-  --baseColor: #EF8A17;
-  --greyColor: #A1A1A1;
+  --baseColor: #ef8a17;
+  --greyColor: #a1a1a1;
 }
 
-body{
+body {
   background-color: #f5f5f5;
 }
 
