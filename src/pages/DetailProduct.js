@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { useGet } from "./../../HTTP/HTTP";
+import { getRequest } from "../config/GlobalFunc";
 import {
   Card,
   CardActionArea,
@@ -20,6 +20,16 @@ const Product = () => {
   const history = useHistory();
   const classes = useStyles();
 
+  const [allProducts, setAllProducts] = useState([]);
+
+  async function getProduct() {
+    let res = await getRequest(`products`);
+    setAllProducts(res.data);
+  }
+
+  useEffect(() => {
+    getProduct();
+  }, []);
   const handlerBack = () => {
     history.push("/");
   };
