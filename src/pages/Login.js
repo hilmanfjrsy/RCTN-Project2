@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import Loading, { postRequest } from "../config/GlobalFunc";
+import { login, loginUser } from "../redux/slice/userSlice";
 
 export default function Login() {
   const [username, setUsername] = useState();
@@ -11,7 +12,7 @@ export default function Login() {
   const [passwordShow, setPasswordShow] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
   const history = useHistory();
-  
+  const dispatch = useDispatch()
   
   useEffect(() => {
     if(localStorage.getItem('token')){
@@ -26,13 +27,15 @@ export default function Login() {
   async function handleLogin() {
     var usernameRegex = /\S+@\S+\.\S+/;
     if (username === "admin@bukapedia.com" && password === "admin123") {
-      localStorage.setItem("token", "admin");
       setIsLoading(true)
       setIsDisabled(true)
+      dispatch(login())
       history.push("/admindashboard");
     } else {
       if (username.match(usernameRegex)) {
-        toast.error('enter the correct username')
+        toast.error('enter the correct username',  {
+          theme: "colored"
+        })
       } else {
         setIsLoading(true)
         setIsDisabled(true)
@@ -47,11 +50,14 @@ export default function Login() {
           if (res.data.token) {
             localStorage.setItem("token", res.data.token);
             history.push("/");
+            dispatch(loginUser())
           } else {
             setIsLoading(false)
             setIsDisabled(false)
             const msgError = res.data.msg;
-            toast.error(msgError)
+            toast.error(msgError,  {
+              theme: "colored"
+            })
           }
         });
       }
