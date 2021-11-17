@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import Loading, { postRequest } from "../config/GlobalFunc";
-import { login, loginUser } from "../redux/slice/userSlice";
+import { login } from "../redux/slice/userSlice";
 
 export default function Login() {
   const [username, setUsername] = useState();
@@ -27,6 +27,7 @@ export default function Login() {
   async function handleLogin() {
     var usernameRegex = /\S+@\S+\.\S+/;
     if (username === "admin@bukapedia.com" && password === "admin123") {
+      localStorage.setItem('token', 'admin')
       setIsLoading(true)
       setIsDisabled(true)
       dispatch(login())
@@ -50,7 +51,7 @@ export default function Login() {
           if (res.data.token) {
             localStorage.setItem("token", res.data.token);
             history.push("/");
-            dispatch(loginUser())
+            dispatch(login())
           } else {
             setIsLoading(false)
             setIsDisabled(false)

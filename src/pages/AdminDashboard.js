@@ -1,13 +1,13 @@
 import React , {useEffect}from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { loginUser, userSelector } from '../redux/slice/userSlice'
+import {userSelector } from '../redux/slice/userSlice'
 
 const AdminDashboard = () => {
     const history = useHistory()
-    const value = useSelector(userSelector)
+    const token = useSelector(userSelector)
     useEffect(() => {
-        if(value !== 'admin'){
+        if(token !== 'admin'){
             history.push('*')
         }
     }, [])
