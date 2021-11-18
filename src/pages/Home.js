@@ -1,14 +1,26 @@
-import React, { Component } from 'react';
-import CardProduct from '../components/CardProduct';
+import React, { Component, useEffect, useState } from "react";
+import CardProduct from "../components/CardProduct";
+import { getRequest } from "../config/GlobalFunc";
 
-export default function Home({ }) {
+export default function Home({}) {
+  const [allProducts, setAllProducts] = useState([]);
+
+  async function getProduct() {
+    let res = await getRequest(`products`);
+    setAllProducts(res.data);
+  }
+
+  useEffect(() => {
+    getProduct();
+  }, []);
 
   return (
-    <div className=" container-fluid">
-      <h3>Product</h3>
+    <div className="container-fluid">
       <div className="wrap">
-        <CardProduct/>
+        {allProducts.map((item, index) => (
+          <CardProduct item={item} index={index} key={index} />
+        ))}
       </div>
     </div>
-  )
+  );
 }

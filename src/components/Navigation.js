@@ -1,18 +1,20 @@
 import React, {useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GlobalVar } from "../config/GlobalVar";
 import { userSelector } from "../redux/slice/userSlice";
+import { getToken } from "../redux/slice/userSlice";
 
 
 const Navigation = () => {
   const [isLogout, setIsLogout] = useState(false)
-
+  const [isAdmin, setIsAdmin] = useState(false)
   const token = useSelector(userSelector)
- 
+  const dispatch = useDispatch()
   function logout(){
     localStorage.removeItem('token')
     setIsLogout(false)
+    dispatch(getToken())
   }
   useEffect(() => {
    if(token){
@@ -20,6 +22,14 @@ const Navigation = () => {
    } else {
     setIsLogout(false)
    }
+  }, [token])
+
+  useEffect(() => {
+    if(token === 'admin'){
+      setIsAdmin(true)
+    } else {
+      setIsAdmin(false)
+    }
   }, [token])
 
   return (
@@ -46,16 +56,17 @@ const Navigation = () => {
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="#" className="nav-link">
+            {isLogout ?  <li className="nav-item" >
+              {isAdmin ? null : <Link to="*" className="nav-link">
                 Cart
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="#" className="nav-link">
+              </Link>}
+            </li> : null}
+            
+            {isAdmin ? <li className="nav-item">
+              <Link to="/admindashboard" className="nav-link">
                 Rekap Penjualan
               </Link>
-            </li>
+            </li> : null}
           </ul>
 
           <Link 
@@ -64,13 +75,6 @@ const Navigation = () => {
           onClick={isLogout ? logout : null}>
            {isLogout ? 'Logout' : 'Login'}
           </Link>
-
-          {/* <Link 
-          to="/"
-          className="nav-link"
-          onClick={logout}>
-            Logout
-          </Link> */}
         </div>
       </div>
     </nav>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import Loading, { postRequest } from "../config/GlobalFunc";
-import { login } from "../redux/slice/userSlice";
+import { getToken } from "../redux/slice/userSlice";
 
 export default function Login() {
   const [username, setUsername] = useState();
@@ -30,7 +30,7 @@ export default function Login() {
       localStorage.setItem('token', 'admin')
       setIsLoading(true)
       setIsDisabled(true)
-      dispatch(login())
+      dispatch(getToken())
       history.push("/admindashboard");
     } else {
       if (username.match(usernameRegex)) {
@@ -51,7 +51,7 @@ export default function Login() {
           if (res.data.token) {
             localStorage.setItem("token", res.data.token);
             history.push("/");
-            dispatch(login())
+            dispatch(getToken())
           } else {
             setIsLoading(false)
             setIsDisabled(false)

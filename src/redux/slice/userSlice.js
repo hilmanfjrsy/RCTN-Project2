@@ -6,7 +6,7 @@ export const userSlice = createSlice({
         token: null || localStorage.getItem('token')
     },
     reducers:{
-        login: () =>{
+        getToken: () =>{
             return {
                 token: localStorage.getItem('token')
             }
@@ -14,6 +14,6 @@ export const userSlice = createSlice({
     }
 })
 
-export const {login} = userSlice.actions
+export const {getToken} = userSlice.actions
 export const userSelector = state => state.user.token
 export default userSlice.reducer
