@@ -36,7 +36,6 @@ function Detail() {
         <h1>Loading Data...</h1>
       ) : (
         <div className="container-product" style={{ display: "flex" }}>
-          {console.log(detailData)}
           <div className="container-img" style={{ flex: 1 }}>
             <img
               src={detailData.image}
@@ -44,14 +43,14 @@ function Detail() {
               alt={detailData.title}
             />
           </div>
-          <div classname="container-description" style={{ flex: 1 }}>
-            <h3>{detailData.category}</h3>
+          <div style={{ flex: 1 }}>
             <h1>{detailData.title}</h1>
+            <h3>{detailData.category}</h3>
             <p>{detailData.description}</p>
-
             {getRating(detailData.rating.count, detailData.rating.rate, 10)}
 
             <h3>{detailData.price}</h3>
+
             <button type="button" className="btn btn-dark w-100 mt-3">
               <i class="fas fa-cart-plus"></i> Add to cart
             </button>
