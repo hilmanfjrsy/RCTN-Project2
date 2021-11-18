@@ -41,6 +41,14 @@ p {
   -webkit-box-orient: vertical;
 }
 
+.container-img {
+  margin: 35px;
+}
+
+.container-product {
+  margin: 80px;
+}
+
 .card-image {
   width: 100%;
   height: 150px;

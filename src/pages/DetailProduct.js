@@ -1,63 +1,65 @@
-import { useState } from "react";
-import { useHistory, useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation, useParams } from "react-router";
 import { getRequest } from "../config/GlobalFunc";
-import {
-  Card,
-  CardActionArea,
-  CardActions,
-  CardMedia,
-  CardContent,
-  Button,
-  Typography,
-} from "@material-ui/core";
-import { useStyles } from "./style";
+import { getRating } from "../config/GlobalFunc";
 
-const Product = () => {
-  const { id } = useParams();
-  const [endpoint, setEndpoint] = useState(`/${id}`);
-  const { data } = useGet(endpoint);
-  const [AllProducts, setAllProducts] = useState([]);
+function Detail() {
+  const [detailData, setDetailData] = useState([]);
   const history = useHistory();
-  const classes = useStyles();
-
-  const [allProducts, setAllProducts] = useState([]);
-
-  async function getProduct() {
-    let res = await getRequest(`products`);
-    setAllProducts(res.data);
-  }
+  const { state } = useLocation();
+  const params = useParams();
 
   useEffect(() => {
-    getProduct();
-  }, []);
-  const handlerBack = () => {
-    history.push("/");
-  };
+    /* This handle for Bug When
+       Open Detail Product from New Tab
+    */
+    // Check current state on Location
+    if (state === undefined) {
+      // If state is undefined then getRequest again & setDetailData
+      getRequest(`products/${params.itemID}`)
+        .then((res) => {
+          setDetailData(res.data);
+        })
+        .catch((err) => {
+          console.error(err);
+          history.push("/errorPage");
+        });
+    } else {
+      // if state has value then set DetailData
+      setDetailData(state.detail);
+    }
+  }, [params, setDetailData]);
 
   return (
-    <>
-      <h1>product detail</h1>
-      <Card item className={classes.root} xs={12} md={8}>
-        <CardActionArea>
-          <CardMedia className={classes.media} image={data.image} />
-          <CardContent className={classes.content}>
-            <Typography gutterBottom variant="h6">
-              $ {data.price} <br />
-              {data.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {data.description}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions className={classes.content}>
-          <Button size="small" color="primary" onClick={handlerBack}>
-            Volver
-          </Button>
-        </CardActions>
-      </Card>
-    </>
-  );
-};
+    <div className="container-fluid">
+      {detailData === [] ? (
+        <h1>Loading Data...</h1>
+      ) : (
+        <div className="container-product" style={{ display: "flex" }}>
+          {console.log(detailData)}
+          <div className="container-img" style={{ flex: 1 }}>
+            <img
+              src={detailData.image}
+              style={{ width: "50%" }}
+              alt={detailData.title}
+            />
+          </div>
+          <div classname="container-description" style={{ flex: 1 }}>
+            <h3>{detailData.category}</h3>
+            <h1>{detailData.title}</h1>
+            <p>{detailData.description}</p>
 
-export default Product;
+            {getRating(detailData.rating.count, detailData.rating.rate, 10)}
+
+            <h3>{detailData.price}</h3>
+            <button type="button" className="btn btn-dark w-100 mt-3">
+              <i class="fas fa-cart-plus"></i> Add to cart
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Detail;

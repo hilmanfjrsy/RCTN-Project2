@@ -9,7 +9,8 @@ export default function CardProduct({ item, index }) {
       <img src={item.image} className="card-image" />
       <div className="card-text">
         <p className="category mb-1 mt-2">{item.category}</p>
-        <Link to="/detail">
+
+        <Link to={{ pathname: `/detail/${item.id}`, state: { detail: item } }}>
           <p className="title clamp">{item.title}</p>
         </Link>
         {getRating(item.rating.rate, item.rating.count, 10)}
