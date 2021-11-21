@@ -37,7 +37,7 @@ export default function CardProduct({ item, index }) {
         >
           <i className="fas fa-cart-plus"></i> Add to cart
         </button>
-        <p className="sales">Sales 4000 &#8226; Stock {item.totalStock}</p>
+        <p className="sales">Sales {item.totalSales} &#8226; Stock {item.totalStock}</p>
       </div>
     </div>
   );
