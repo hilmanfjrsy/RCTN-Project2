@@ -68,7 +68,7 @@ export const getRating = (total = 0, count = 0, fontSize = 10) => {
 
   return (
     <div>
-      <span style={{ fontSize:fontSize+3,fontWeight:'bold',marginRight:5, color: GlobalVar.goldColor }}>{total}</span>
+      <span style={{ fontSize: fontSize + 3, fontWeight: 'bold', marginRight: 5, color: GlobalVar.goldColor }}>{total}</span>
       {getStars(total).map((value, idx) => {
         return (
           <li key={idx} className="list-inline-item m-0">
@@ -86,11 +86,32 @@ export const getRating = (total = 0, count = 0, fontSize = 10) => {
   );
 };
 
-export default function Loading() {
+export function Loading() {
   return (
     <>
       <span class="spinner-border spinner-border-sm" aria-hidden="true" />
       &nbsp;&nbsp;
     </>
   );
+}
+
+export function filterResponse(res = [], stock = []) {
+  let temp = []
+  if (stock.length > 0) {
+    res.map((item, index) => {
+      const newItem = Object.assign({}, item, { countCart: 0, totalStock: 0, totalSales: 0 });
+      temp.push(newItem)
+      stock.map((items) => {
+        if (item.id == items.id) {
+          temp[index] = Object.assign({}, item, { countCart: items.countCart, totalStock: items.totalStock, totalSales: items.totalSales });
+        }
+      })
+    })
+  } else {
+    res.map((item, index) => {
+      const newItem = Object.assign({}, item, { countCart: 0, totalStock: 0, totalSales: 0 });
+      temp.push(newItem)
+    })
+  }
+  return temp
 }
