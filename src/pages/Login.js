@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
-import Loading, { postRequest } from "../config/GlobalFunc";
+import { postRequest,Loading } from "../config/GlobalFunc";
 import { login, loginUser } from "../redux/slice/userSlice";
 
 export default function Login() {

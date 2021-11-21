@@ -1,24 +1,23 @@
 import React, { Component, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import CardProduct from "../components/CardProduct";
-import { getRequest } from "../config/GlobalFunc";
+import { filterResponse, getRequest } from "../config/GlobalFunc";
 
-export default function Home({}) {
+export default function Home({ }) {
   const [allProducts, setAllProducts] = useState([]);
+  const stock = useSelector((state) => state.cart.data)
 
   async function getProduct() {
     let res = await getRequest(`products`);
-    setAllProducts(res.data);
+    if (res.status == 200) {
+      let filter = filterResponse(res.data, stock)
+      setAllProducts(filter);
+    }
   }
-
-  // useEffect(() => {
-  //   fetch("https://fakestoreapi.com/products")
-  //     .then((result) => result.json())
-  //     .then((response) => setAllProducts(response));
-  // }, []);
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [stock]);
 
   return (
     <div className="container-fluid">
