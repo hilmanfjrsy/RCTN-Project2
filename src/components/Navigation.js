@@ -1,42 +1,40 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GlobalVar } from "../config/GlobalVar";
 import { userSelector } from "../redux/slice/userSlice";
 import { getToken } from "../redux/slice/userSlice";
 
-
 const Navigation = () => {
-  const [isLogout, setIsLogout] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(false)
-  const token = useSelector(userSelector)
-  const dispatch = useDispatch()
-  function logout(){
-    localStorage.removeItem('token')
-    setIsLogout(false)
-    dispatch(getToken())
+  const [isLogout, setIsLogout] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const token = useSelector(userSelector);
+  const dispatch = useDispatch();
+  function logout() {
+    localStorage.removeItem("token");
+    setIsLogout(false);
+    dispatch(getToken());
   }
   useEffect(() => {
-   if(token){
-    setIsLogout(true)
-   } else {
-    setIsLogout(false)
-   }
-  }, [token])
-
-  useEffect(() => {
-    if(token === 'admin'){
-      setIsAdmin(true)
+    if (token) {
+      setIsLogout(true);
     } else {
-      setIsAdmin(false)
+      setIsLogout(false);
     }
-  }, [token])
+    if (token === "admin") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  }, [token]);
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          <h4 style={{ color: GlobalVar.baseColor, fontWeight: 'bold' }}>Kelompok 2</h4>
+          <h4 style={{ color: GlobalVar.baseColor, fontWeight: "bold" }}>
+            Kelompok 2
+          </h4>
         </a>
         <button
           className="navbar-toggler"
@@ -56,24 +54,31 @@ const Navigation = () => {
                 Home
               </Link>
             </li>
-            {isLogout ?  <li className="nav-item" >
-              {isAdmin ? null : <Link to="*" className="nav-link">
-                Cart
-              </Link>}
-            </li> : null}
-            
-            {isAdmin ? <li className="nav-item">
-              <Link to="/admindashboard" className="nav-link">
-                Rekap Penjualan
-              </Link>
-            </li> : null}
+            {isLogout ? (
+              <li className="nav-item">
+                {isAdmin ? null : (
+                  <Link to="*" className="nav-link">
+                    Cart
+                  </Link>
+                )}
+              </li>
+            ) : null}
+
+            {isAdmin ? (
+              <li className="nav-item">
+                <Link to="/admindashboard" className="nav-link">
+                  Rekap Penjualan
+                </Link>
+              </li>
+            ) : null}
           </ul>
 
-          <Link 
-          to={isLogout ? '/' : '/login'}
-          className="nav-link"
-          onClick={isLogout ? logout : null}>
-           {isLogout ? 'Logout' : 'Login'}
+          <Link
+            to={isLogout ? "/" : "/login"}
+            className="nav-link"
+            onClick={isLogout ? logout : null}
+          >
+            {isLogout ? "Logout" : "Login"}
           </Link>
         </div>
       </div>

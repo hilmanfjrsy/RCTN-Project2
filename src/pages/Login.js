@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import Loading, { postRequest } from "../config/GlobalFunc";
@@ -27,10 +27,9 @@ export default function Login() {
   async function handleLogin() {
     var usernameRegex = /\S+@\S+\.\S+/;
     if (username === "admin@bukapedia.com" && password === "admin123") {
-      localStorage.setItem('token', 'admin')
       setIsLoading(true)
       setIsDisabled(true)
-      dispatch(getToken())
+      dispatch(getToken("admin"))
       history.push("/admindashboard");
     } else {
       if (username.match(usernameRegex)) {
@@ -49,9 +48,8 @@ export default function Login() {
           password: password,
         }).then((res) => {
           if (res.data.token) {
-            localStorage.setItem("token", res.data.token);
             history.push("/");
-            dispatch(getToken())
+            dispatch(getToken(res.data.token))
           } else {
             setIsLoading(false)
             setIsDisabled(false)
