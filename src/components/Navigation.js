@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { GlobalVar } from "../config/GlobalVar";
 import { userSelector } from "../redux/slice/userSlice";
-import { getToken } from "../redux/slice/userSlice";
+import { getToken, removeToken } from "../redux/slice/userSlice";
 
 const Navigation = () => {
   const [isLogout, setIsLogout] = useState(false);
@@ -11,9 +11,8 @@ const Navigation = () => {
   const token = useSelector(userSelector);
   const dispatch = useDispatch();
   function logout() {
-    localStorage.removeItem("token");
+    dispatch(removeToken())
     setIsLogout(false);
-    dispatch(getToken());
   }
   useEffect(() => {
     if (token) {

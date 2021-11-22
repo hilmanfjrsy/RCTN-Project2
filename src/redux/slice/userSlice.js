@@ -12,9 +12,14 @@ export const userSlice = createSlice({
                 token: newToken||localStorage.getItem("token")
             }
         },
+        removeToken: () => {
+            return{
+                token: localStorage.removeItem("token")
+            }
+        }
     }
 })
 
-export const {getToken} = userSlice.actions
+export const {getToken, removeToken} = userSlice.actions
 export const userSelector = state => state.user.token
 export default userSlice.reducer
