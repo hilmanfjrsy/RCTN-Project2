@@ -10,13 +10,7 @@ export default function Home({}) {
     setAllProducts(res.data);
   }
 
-  // useEffect(() => {
-  //   fetch("https://fakestoreapi.com/products")
-  //     .then((result) => result.json())
-  //     .then((response) => setAllProducts(response));
-  // }, []);
-
-  useEffect(() => {
+   useEffect(() => {
     getProduct();
   }, []);
 

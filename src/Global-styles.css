@@ -12,6 +12,7 @@ a {
   color: black !important;
 }
 
+
 .card-container {
   flex: 1 0 500px;
   background-color: white;
@@ -45,9 +46,19 @@ p {
   margin: 35px;
 }
 
+.container-detailimg {
+  margin: 30px;
+}
+
 .container-product {
   margin: 80px;
 }
+
+.container-detailproduct {
+  margin: 40px;
+  
+}
+
 
 .card-image {
   width: 100%;
@@ -205,6 +216,50 @@ form {
   font-size: 12px;
   font-weight: 700;
 }
+
+.detailform{
+ margin-right: 40px;
+ margin-top: 15px;
+}
+
+.detailquantity{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+
+.detailtitle{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.detailcategory{
+ font-size: 22px;
+ color: var(--baseColor);
+}
+
+.detaildescription{
+  margin-top: 15px;
+  font-size: 20px;
+  text-align: justify;
+}
+
+.detailprice{
+  font-size: 32px;
+  margin-top: 15px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.detailresult{
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* .buttoncart{
+ margin-top: 20px;
+} */
 
 .hr {
   border: 1px solid var(--greyColor) !important;
