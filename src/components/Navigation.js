@@ -6,20 +6,13 @@ import { userSelector } from "../redux/slice/userSlice";
 import { getToken, removeToken } from "../redux/slice/userSlice";
 
 const Navigation = () => {
-  const [isLogout, setIsLogout] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const token = useSelector(userSelector);
   const dispatch = useDispatch();
   function logout() {
     dispatch(removeToken())
-    setIsLogout(false);
   }
   useEffect(() => {
-    if (token) {
-      setIsLogout(true);
-    } else {
-      setIsLogout(false);
-    }
     if (token === "admin") {
       setIsAdmin(true);
     } else {
@@ -53,7 +46,7 @@ const Navigation = () => {
                 Home
               </Link>
             </li>
-            {isLogout ? (
+            {token ? (
               <li className="nav-item">
                 {isAdmin ? null : (
                   <Link to="*" className="nav-link">
@@ -73,11 +66,11 @@ const Navigation = () => {
           </ul>
 
           <Link
-            to={isLogout ? "/" : "/login"}
+            to={token ? "/" : "/login"}
             className="nav-link"
-            onClick={isLogout ? logout : null}
+            onClick={token ? logout : null}
           >
-            {isLogout ? "Logout" : "Login"}
+            {token ? "Logout" : "Login"}
           </Link>
         </div>
       </div>

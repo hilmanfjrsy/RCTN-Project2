@@ -7,15 +7,15 @@ export const userSlice = createSlice({
     },
     reducers:{
         getToken: (state,payload) =>{
-            const newToken = localStorage.setItem("token", payload.payload) || localStorage.getItem("token")
+            localStorage.setItem("token", payload.payload)
             return {
-                token: newToken
+                token: payload.payload
             }
         },
         removeToken: () => {
-            const newToken = localStorage.removeItem("token") || null
+            localStorage.removeItem("token")
             return{
-                token: newToken
+                token: null 
             }
         }
     }
