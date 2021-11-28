@@ -21,10 +21,11 @@ const TableTemplate = () => {
         if (outStock.length > 0) {
           toast.error(outStock.length + ' Product out of stock!')
         }
+      } else {
+        let price = filter.filter((v) => v.totalSales > 0).map((item) => item.price * item.totalSales).reduce((prev, curr) => prev + curr).toFixed(2)
+        setTotalPrice(price)
       }
       setProducts(filter);
-      let price = filter.filter((v) => v.totalSales > 0).map((item) => item.price * item.totalSales).reduce((prev, curr) => prev + curr).toFixed(2)
-      setTotalPrice(price)
     }
   }
 
