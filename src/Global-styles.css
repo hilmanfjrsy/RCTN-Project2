@@ -48,15 +48,17 @@ p {
 
 .container-detailimg {
   margin: 30px;
+  margin-left: 60px;
 }
 
 .container-product {
   margin: 80px;
+ 
 }
 
 .container-detailproduct {
   margin: 40px;
-  
+  padding-right: 70px;
 }
 
 
@@ -223,13 +225,15 @@ form {
 }
 
 .detailquantity{
-  display: flex;
-  flex-direction: row;
+  /* display: flex */
+  /* flex-direction: row; */
   margin-top: 10px;
+  
+  height: 30px;
 }
 
 .detailtitle{
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
 }
 

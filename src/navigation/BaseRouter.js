@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Detail from "../pages/DetailProduct";
+import Cart from "../pages/Cart";
 
 export default function BaseRouter() {
   return (
@@ -10,6 +11,7 @@ export default function BaseRouter() {
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/detail/:itemID" component={Detail} />
+      <Route path="/cart" component={Cart} />
       <Route path="*" component={Is404} />
     </Switch>
   );
