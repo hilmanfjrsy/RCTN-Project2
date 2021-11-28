@@ -55,7 +55,7 @@ const Navigation = () => {
             {token ? (
               <li className="nav-item">
                 {isAdmin ? null : (
-                  <Link to="*" className="nav-link">
+                  <Link to="/cart" className="nav-link">
                     Cart
                   </Link>
                 )}
