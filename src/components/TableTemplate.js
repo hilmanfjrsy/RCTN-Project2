@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { getRequest } from "../config/GlobalFunc";
+import { toast } from "react-toastify";
+import { filterResponse, getRequest } from "../config/GlobalFunc";
 import DataRecap from "./DataRecap";
 import DataUpdate from "./DataUpdate";
 
 const TableTemplate = () => {
   const [products, setProducts] = useState([]);
+  const stock = useSelector((state) => state.cart.data)
   const { pathname } = useLocation();
 
   async function getAllProducts() {
     let res = await getRequest("products");
-    setProducts(res.data);
+    if (res.status == 200) {
+      let filter = filterResponse(res.data, stock)
+      if (pathname === "/home-admin") {
+        const outStock = filter.filter((item) => item.totalStock == 0)
+        if (outStock.length > 0) {
+          toast.error(outStock.length + ' Product out of stock!')
+        }
+      }
+      setProducts(filter);
+    }
   }
 
   useEffect(() => {
@@ -30,9 +42,9 @@ const TableTemplate = () => {
       </thead>
       <tbody>
         {pathname === "/home-admin" ? (
-           products.map((item)=>{return <DataUpdate key={item.id} item={item}/>})
+          products.map((item) => { return <DataUpdate key={item.id} item={item} /> })
         ) : (
-            products.map((item)=>{return <DataRecap key={item.id} item={item}/>})
+          products.map((item) => { return <DataRecap key={item.id} item={item} /> })
         )}
       </tbody>
       <tfoot

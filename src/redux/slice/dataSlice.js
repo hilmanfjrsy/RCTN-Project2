@@ -4,7 +4,7 @@ const stock = JSON.parse(localStorage.getItem('stock'))
 export const dataSlice = createSlice({
   name: "data",
   initialState: {
-    data: stock?.length>0 ? stock : []
+    data: stock?.length > 0 ? stock : []
   },
   reducers: {
     addData: (state, action) => {
@@ -16,9 +16,9 @@ export const dataSlice = createSlice({
             if (item.id == action.payload.id) {
               temp.push({
                 id: item.id,
-                countCart: action.payload.countCart + item.countCart,
-                totalStock: action.payload.totalStock + item.totalStock,
-                totalSales: action.payload.totalSales + item.totalSales,
+                countCart: parseInt(action.payload.countCart) + parseInt(item.countCart),
+                totalStock: parseInt(action.payload.totalStock),
+                totalSales: parseInt(action.payload.totalSales) + parseInt(item.totalSales),
               })
             } else {
               temp.push(item)
@@ -29,7 +29,7 @@ export const dataSlice = createSlice({
         temp = temp.concat(state.data)
         temp.push(action.payload)
       }
-      localStorage.setItem('stock',JSON.stringify(temp))
+      localStorage.setItem('stock', JSON.stringify(temp))
       return { data: temp }
     },
     removeData: (state, action) => {

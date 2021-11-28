@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useHistory } from "react-router";
 import { getRating } from '../config/GlobalFunc';
 import { addData } from '../redux/slice/dataSlice';
+import { userSelector } from '../redux/slice/userSlice';
 
 export default function CardProduct({ item, index }) {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const token = useSelector(userSelector);
   return (
     <div className="card-container">
       <img src={item.image} className="card-image mt-2" />
@@ -33,7 +37,8 @@ export default function CardProduct({ item, index }) {
         <button
           type="button"
           className="btn btn-dark w-100 mt-3"
-          onClick={() => add(item.id)}
+          disabled={item.totalStock > 0 ? false : true}
+          onClick={() => add(item)}
         >
           <i className="fas fa-cart-plus"></i> Add to cart
         </button>
@@ -42,14 +47,19 @@ export default function CardProduct({ item, index }) {
     </div>
   );
 
-  function add(id) {
-    const data = {
-      id,
-      countCart: 1,
-      totalStock: 0,
-      totalSales: 0
+  function add(item) {
+    if (token) {
+      const data = {
+        id: item.id,
+        countCart: 1,
+        totalStock: item.totalStock,
+        totalSales: item.totalSales
+      }
+      dispatch(addData(data))
+      toast.success('Add to cart')
+    } else {
+      history.push("/login");
+      toast.error("You're not logged")
     }
-    dispatch(addData(data))
-    toast.success('Add to cart')
   }
 }
