@@ -5,7 +5,7 @@ import { addData } from '../redux/slice/dataSlice';
 
 const DataUpdate = ({ item }) => {
   const dispatch = useDispatch()
-  const [currentStock, setCurrentStock] = useState(item.totalStock)
+  const [currentStock, setCurrentStock] = useState(item.totalStock > 0 ? item.totalStock : null)
 
   return (
     <tr>

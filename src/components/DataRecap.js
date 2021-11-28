@@ -7,9 +7,9 @@ const DataRecap = ({item}) => {
         <p className="h5">{item.title}</p>
         <p className="mt-2">{item.category}</p>
       </td>
-      <td>{item.price}</td>
-      <td>10</td>
-      <td>terjual * price</td>
+      <td>${item.price}</td>
+      <td>{item.totalSales}</td>
+      <td>${item.price * item.totalSales}</td>
     </tr>
   );
 };

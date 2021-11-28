@@ -10,6 +10,7 @@ const TableTemplate = () => {
   const [products, setProducts] = useState([]);
   const stock = useSelector((state) => state.cart.data)
   const { pathname } = useLocation();
+  const [totalPrice, setTotalPrice] = useState(0)
 
   async function getAllProducts() {
     let res = await getRequest("products");
@@ -22,6 +23,8 @@ const TableTemplate = () => {
         }
       }
       setProducts(filter);
+      let price = filter.filter((v) => v.totalSales > 0).map((item) => item.price * item.totalSales).reduce((prev, curr) => prev + curr).toFixed(2)
+      setTotalPrice(price)
     }
   }
 
@@ -44,7 +47,7 @@ const TableTemplate = () => {
         {pathname === "/home-admin" ? (
           products.map((item) => { return <DataUpdate key={item.id} item={item} /> })
         ) : (
-          products.map((item) => { return <DataRecap key={item.id} item={item} /> })
+          products.filter((v) => v.totalSales > 0).map((item) => { return <DataRecap key={item.id} item={item} /> })
         )}
       </tbody>
       <tfoot
@@ -61,7 +64,7 @@ const TableTemplate = () => {
           <tr>
             <th colSpan="2"></th>
             <th>TOTAL PENDAPATAN</th>
-            <th>18 USD</th>
+            <th>${totalPrice}</th>
           </tr>
         )}
       </tfoot>

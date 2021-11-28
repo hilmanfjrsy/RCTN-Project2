@@ -8,7 +8,10 @@ import { getToken, removeToken } from "../redux/slice/userSlice";
 const Navigation = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const token = useSelector(userSelector);
+  const stock = useSelector((state) => state.cart.data).map((item) => item.countCart)
   const dispatch = useDispatch();
+  const cartCount = stock.reduce((prev, curr) => parseInt(prev) + parseInt(curr))
+
   function logout() {
     dispatch(removeToken());
   }
@@ -53,10 +56,17 @@ const Navigation = () => {
               )}
             </li>
             {token ? (
-              <li className="nav-item">
+              <li className="nav-item position-relative">
                 {isAdmin ? null : (
                   <Link to="/cart" className="nav-link">
                     Cart
+                    <span className="position-absolute mt-1 ml-1 start-100 translate-middle badge rounded-pill bg-warning">
+                      {cartCount == 0
+                        ? null
+                        : cartCount > 99
+                          ? "99+"
+                          : cartCount}
+                    </span>
                   </Link>
                 )}
               </li>
