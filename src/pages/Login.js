@@ -1,9 +1,9 @@
-import React, { Component, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import { postRequest,Loading } from "../config/GlobalFunc";
-import { login, loginUser } from "../redux/slice/userSlice";
+import { getToken } from "../redux/slice/userSlice";
 
 export default function Login() {
   const [username, setUsername] = useState();
@@ -29,8 +29,8 @@ export default function Login() {
     if (username === "admin@bukapedia.com" && password === "admin123") {
       setIsLoading(true)
       setIsDisabled(true)
-      dispatch(login())
-      history.push("/admindashboard");
+      dispatch(getToken("admin"))
+      history.push("/home-admin");
     } else {
       if (username.match(usernameRegex)) {
         toast.error('enter the correct username',  {
@@ -48,9 +48,8 @@ export default function Login() {
           password: password,
         }).then((res) => {
           if (res.data.token) {
-            localStorage.setItem("token", res.data.token);
             history.push("/");
-            dispatch(loginUser())
+            dispatch(getToken(res.data.token))
           } else {
             setIsLoading(false)
             setIsDisabled(false)

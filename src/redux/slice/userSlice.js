@@ -3,23 +3,24 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
     name: "user",
     initialState:{
-        value: null || localStorage.getItem('token')
+        token: null || localStorage.getItem('token')
     },
     reducers:{
-        login: () =>{
-            let token = localStorage.setItem('token', 'admin')
+        getToken: (state,payload) =>{
+            localStorage.setItem("token", payload.payload)
             return {
-                value: localStorage.getItem('token'), token
+                token: payload.payload
             }
         },
-        loginUser : (action) => {
-            return {
-                value: localStorage.getItem('token')
+        removeToken: () => {
+            localStorage.removeItem("token")
+            return{
+                token: null 
             }
         }
     }
 })
 
-export const {login, loginUser} = userSlice.actions
-export const userSelector = state => state.user.value
+export const {getToken, removeToken} = userSlice.actions
+export const userSelector = state => state.user.token
 export default userSlice.reducer
