@@ -6,8 +6,8 @@ import { postRequest,Loading } from "../config/GlobalFunc";
 import { getToken } from "../redux/slice/userSlice";
 
 export default function Login() {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false)
   const [passwordShow, setPasswordShow] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
@@ -33,7 +33,7 @@ export default function Login() {
       history.push("/home-admin");
     } else {
       if (username.match(usernameRegex)) {
-        toast.error('enter the correct username',  {
+        toast.error('username or password is incorrect',  {
           theme: "colored"
         })
       } else {
