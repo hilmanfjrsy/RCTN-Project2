@@ -1,15 +1,17 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import AdminDashboard from "../pages/AdminDashboard";
 import Home from "../pages/Home";
+import HomeAdmin from "../pages/HomeAdmin";
 import Login from "../pages/Login";
+import SalesRecap from "../pages/SalesRecap";
 
 export default function BaseRouter() {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
-      <Route path="/admindashboard" component={AdminDashboard} />
+      <Route path="/home-admin" component={HomeAdmin} />
+      <Route path="/rekap-penjualan" component={SalesRecap} />
       <Route path="*" component={Is404} />
     </Switch>
   );

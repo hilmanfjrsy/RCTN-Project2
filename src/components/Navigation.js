@@ -10,7 +10,7 @@ const Navigation = () => {
   const token = useSelector(userSelector);
   const dispatch = useDispatch();
   function logout() {
-    dispatch(removeToken())
+    dispatch(removeToken());
   }
   useEffect(() => {
     if (token === "admin") {
@@ -42,9 +42,15 @@ const Navigation = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
-                Home
-              </Link>
+              {isAdmin ? (
+                <Link to="/home-admin" className="nav-link">
+                  Home
+                </Link>
+              ) : (
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
+              )}
             </li>
             {token ? (
               <li className="nav-item">
@@ -58,7 +64,7 @@ const Navigation = () => {
 
             {isAdmin ? (
               <li className="nav-item">
-                <Link to="/admindashboard" className="nav-link">
+                <Link to="/rekap-penjualan" className="nav-link">
                   Rekap Penjualan
                 </Link>
               </li>

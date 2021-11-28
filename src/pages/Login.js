@@ -30,7 +30,7 @@ export default function Login() {
       setIsLoading(true)
       setIsDisabled(true)
       dispatch(getToken("admin"))
-      history.push("/admindashboard");
+      history.push("/home-admin");
     } else {
       if (username.match(usernameRegex)) {
         toast.error('enter the correct username',  {
