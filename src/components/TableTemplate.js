@@ -8,7 +8,7 @@ import DataUpdate from "./DataUpdate";
 
 const TableTemplate = () => {
   const [products, setProducts] = useState([]);
-  const stock = useSelector((state) => state.cart.data)
+  const stock = useSelector((state) => state.data.data)
   const { pathname } = useLocation();
   const [totalPrice, setTotalPrice] = useState(0)
 
@@ -22,8 +22,11 @@ const TableTemplate = () => {
           toast.error(outStock.length + ' Product out of stock!')
         }
       } else {
-        let price = filter.filter((v) => v.totalSales > 0).map((item) => item.price * item.totalSales).reduce((prev, curr) => prev + curr).toFixed(2)
-        setTotalPrice(price)
+        filter = filter.filter((v) => v.totalSales > 0)
+        if (filter.length > 0) {
+          let price = filter.map((item) => item.totalPriceSales).reduce((prev, curr) => prev + curr)
+          setTotalPrice(price)
+        }
       }
       setProducts(filter);
     }
@@ -48,7 +51,7 @@ const TableTemplate = () => {
         {pathname === "/home-admin" ? (
           products.map((item) => { return <DataUpdate key={item.id} item={item} /> })
         ) : (
-          products.filter((v) => v.totalSales > 0).map((item) => { return <DataRecap key={item.id} item={item} /> })
+          products.map((item) => { return <DataRecap key={item.id} item={item} /> })
         )}
       </tbody>
       <tfoot

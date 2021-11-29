@@ -9,7 +9,7 @@ const DataRecap = ({item}) => {
       </td>
       <td>${item.price}</td>
       <td>{item.totalSales}</td>
-      <td>${item.price * item.totalSales}</td>
+      <td>${item.totalPriceSales}</td>
     </tr>
   );
 };

@@ -5,7 +5,7 @@ import { filterResponse, getRequest } from "../config/GlobalFunc";
 
 export default function Home({ }) {
   const [allProducts, setAllProducts] = useState([]);
-  const stock = useSelector((state) => state.cart.data)
+  const stock = useSelector((state) => state.data.data)
 
   async function getProduct() {
     let res = await getRequest(`products`);

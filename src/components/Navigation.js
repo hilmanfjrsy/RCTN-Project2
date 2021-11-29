@@ -8,9 +8,9 @@ import { getToken, removeToken } from "../redux/slice/userSlice";
 const Navigation = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const token = useSelector(userSelector);
-  const stock = useSelector((state) => state.cart.data).map((item) => item.countCart)
+  const stock = useSelector((state) => state.data.data).map((item) => item.countCart)
   const dispatch = useDispatch();
-  const cartCount = stock.reduce((prev, curr) => parseInt(prev) + parseInt(curr))
+  const cartCount = stock.length >0 ?stock.reduce((prev, curr) => parseInt(prev) + parseInt(curr)):0
 
   function logout() {
     dispatch(removeToken());

@@ -32,13 +32,35 @@ export const dataSlice = createSlice({
       localStorage.setItem('stock', JSON.stringify(temp))
       return { data: temp }
     },
-    removeData: (state, action) => {
-      return null
+    checkoutData: (state, action) => {
+      let temp = []
+      let filterTemp = state.data.filter((item) => item.id == action.payload.id)
+      if (filterTemp.length > 0) {
+        if (state.data.length > 0) {
+          state.data.map((item) => {
+            if (item.id == action.payload.id) {
+              temp.push({
+                id: item.id,
+                countCart: 0,
+                totalStock: parseInt(item.totalStock) - parseInt(action.payload.countCart),
+                totalSales: parseInt(item.totalSales) + parseInt(action.payload.countCart),
+              })
+            } else {
+              temp.push(item)
+            }
+          })
+        }
+      } else {
+        temp = temp.concat(state.data)
+        temp.push(action.payload)
+      }
+      localStorage.setItem('stock', JSON.stringify(temp))
+      return { data: temp }
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addData, removeData } = dataSlice.actions;
+export const { addData, checkoutData } = dataSlice.actions;
 
 export default dataSlice.reducer;
