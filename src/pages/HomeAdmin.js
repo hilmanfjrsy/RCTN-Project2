@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import AdminStockLoader from "../components/Loaders/AdminStockLoader";
 import TableTemplate from "../components/TableTemplate";
 import { userSelector } from "../redux/slice/userSlice";
 
