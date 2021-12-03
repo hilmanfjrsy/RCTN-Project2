@@ -38,15 +38,14 @@ export default function Cart() {
     return (
         <div className="bg-cartpage">
             <div className="container">
-                <div style={{marginBottom: 30, marginTop: 30,display:"flex",}}>
+                <div style={{marginBottom: 20, marginTop: 30,display:"flex",}}>
                     <p style={{marginTop:10,marginRight:20}}><i class="fas fa-shopping-cart fa-lg"></i></p>
                     <p><h2>My Cart</h2></p>
                 </div>
                 <div>
                     <table cellpadding="20" >
                         <thead>
-                            <tr>
-                                
+                            <tr>                                
                                 <th>Product Name</th>
                                 <th>Unit Price</th>
                                 <th>Quantity</th>
