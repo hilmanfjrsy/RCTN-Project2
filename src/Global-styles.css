@@ -221,7 +221,7 @@ form {
 
 .detailform{
  margin-right: 40px;
- margin-top: 15px;
+ margin-top: 10px;
 }
 
 .detailquantity{
@@ -233,7 +233,7 @@ form {
 }
 
 .detailtitle{
-  font-size: 36px;
+  font-size: 32px;
   font-weight: bold;
 }
 
@@ -243,16 +243,16 @@ form {
 }
 
 .detaildescription{
-  margin-top: 15px;
+  margin-top: 5px;
   font-size: 20px;
   text-align: justify;
 }
 
 .detailprice{
   font-size: 32px;
-  margin-top: 15px;
+  margin-top: 10px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .detailresult{
@@ -261,9 +261,24 @@ form {
   font-size: 20px;
 }
 
-/* .buttoncart{
- margin-top: 20px;
-} */
+.buttonOnCart{
+  margin-right: 30;
+  float: right;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #DDD;
+}
+
+tr:hover {background-color: #D6EEEE;}
 
 .hr {
   border: 1px solid var(--greyColor) !important;
