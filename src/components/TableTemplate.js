@@ -48,9 +48,17 @@ const TableTemplate = () => {
   return (
     <div>
       {isFetching ? (
-        pathname === '/home-admin' ? loadData.map((item) => <AdminStockLoader item={item} />) :loadData.map((item) => <AdminRecapLoader item={item} />)
+        pathname === "/home-admin" ? (
+          loadData.map((item) => <AdminStockLoader item={item} />)
+        ) : (
+          loadData.map((item) => <AdminRecapLoader item={item} />)
+        )
       ) : (
-        <table className="table table-striped" style={{ width: "100%" }}>
+        <table
+          id="table"
+          className="table table-striped"
+          style={{ width: "100%" }}
+        >
           <thead className="bg-dark text-light">
             <tr>
               <th>Product</th>
