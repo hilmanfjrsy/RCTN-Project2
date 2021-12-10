@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom';
 import { filterResponse, getRequest } from "../config/GlobalFunc";
 import { GlobalVar } from "../config/GlobalVar";
 import { addData, checkoutData } from "../redux/slice/dataSlice";
@@ -37,13 +38,14 @@ export default function Cart() {
     return (
         <div className="bg-cartpage">
             <div className="container">
-                <div style={{ marginBottom: 30, marginTop: 30 }}>
-                    <h1>My Cart</h1>
+                <div style={{marginBottom: 20, marginTop: 30,display:"flex",}}>
+                    <p style={{marginTop:10,marginRight:20}}><i class="fas fa-shopping-cart fa-lg"></i></p>
+                    <p><h2>My Cart</h2></p>
                 </div>
                 <div>
-                    <table border="1" cellpadding="20" >
+                    <table cellpadding="20" >
                         <thead>
-                            <tr>
+                            <tr>                                
                                 <th>Product Name</th>
                                 <th>Unit Price</th>
                                 <th>Quantity</th>
@@ -62,11 +64,20 @@ export default function Cart() {
                         </tfoot>
                     </table>
                 </div>
+                <div className="buttonOnCart">
+                <Link to={{ pathname: `/`}}>
+                    <button
+                        className="btn btn-warning" style={{marginTop:20,marginRight:20,}}>
+                        Close
+                    </button>
+                </Link>
+                
                 <button
                     onClick={() => checkoutProduct()}
-                    className="btn btn-primary">
+                    className="btn btn-primary" style={{marginTop:20,}}>
                     Checkout
                 </button>
+                </div>
             </div>
         </div>
     )

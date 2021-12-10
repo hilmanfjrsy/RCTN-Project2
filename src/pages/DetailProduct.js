@@ -44,13 +44,15 @@ function Detail() {
         <div className="detailform" style={{ flex: 1 }}>
           <div className="detailtitle">{state.detail.title}</div>
           <div className="detailcategory">{state.detail.category}</div>
-          <div className="detaildescription">{state.detail.description}</div>
+         
           {getRating(state.detail.rating.rate, state.detail.rating.count, 10)}
           <h5 style={{ marginTop: 20 }}>Quantity</h5>
           <div className="detailquantity">
             <input type="number" value={currentStock} min={0} onChange={(v) => setCurrentStock(v.target.value)} style={{ width: 50 }} />
           </div>
           <div className="detailprice">${state.detail.price}</div>
+          <div className="h5">Product Detail</div>
+          <div className="detaildescription">{state.detail.description}</div>
           {state.detail.totalStock > 0 ?
             <p className="description" style={{ textAlign: "right" }}>
               <i className="fas fa-check text-success" style={{ fontSize: 10 }}></i>{" "}
