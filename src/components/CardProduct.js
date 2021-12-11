@@ -55,7 +55,7 @@ export default function CardProduct({ item, index }) {
         id: item.id,
         countCart: 1,
         totalStock: item.totalStock,
-        totalSales: item.totalSales
+        totalSales: 0
       }
       dispatch(addData(data))
       toast.success('Add to cart')

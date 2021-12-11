@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: white;
 }
 
 a {
@@ -53,7 +53,7 @@ p {
 
 .container-product {
   margin: 80px;
- 
+
 }
 
 .container-detailproduct {
@@ -100,6 +100,7 @@ p {
   color: var(--greyColor);
   margin-top: 10px;
 }
+
 .sales {
   font-size: 10px;
   font-weight: normal;
@@ -113,6 +114,7 @@ p {
   border-radius: 5px;
   color: var(--greyColor);
 }
+
 .btn-eye:hover {
   color: var(--baseColor);
   border: 0px transparent;
@@ -181,7 +183,7 @@ form {
   pointer-events: painted;
 }
 
-.btn-search:focus ~ .form-input-search {
+.btn-search:focus~.form-input-search {
   width: 300px;
   border-radius: 0px;
   background-color: transparent;
@@ -219,51 +221,53 @@ form {
   font-weight: 700;
 }
 
-.detailform{
- margin-right: 40px;
- margin-top: 15px;
-}
-
-.detailquantity{
-  /* display: flex */
-  /* flex-direction: row; */
+.detailform {
+  margin-right: 40px;
   margin-top: 10px;
-  
-  height: 30px;
 }
 
-.detailtitle{
-  font-size: 36px;
+.detailtitle {
+  font-size: 32px;
   font-weight: bold;
 }
 
-.detailcategory{
- font-size: 22px;
- color: var(--baseColor);
+.detailcategory {
+  font-size: 22px;
+  color: var(--baseColor);
 }
 
-.detaildescription{
-  margin-top: 15px;
-  font-size: 20px;
+.detaildescription {
+  margin-top: 5px;
+  font-size: 16px;
+  color: grey;
   text-align: justify;
 }
 
-.detailprice{
+.detailprice {
   font-size: 32px;
-  margin-top: 15px;
+  margin-top: 10px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.detailresult{
+.detailresult {
   margin-left: 10px;
   margin-right: 10px;
   font-size: 20px;
 }
 
-/* .buttoncart{
- margin-top: 20px;
-} */
+.buttonOnCart {
+  background-color: white;
+  padding: 20px 30px;
+  position: sticky;
+  align-items: center;
+  bottom: 0px;
+}
+
+.buttonOnCart span {
+  font-size: 14px;
+  color: grey;
+}
 
 .hr {
   border: 1px solid var(--greyColor) !important;
@@ -288,4 +292,71 @@ form {
   overflow: hidden;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+
+
+.table-wrap {
+  overflow-x: scroll;
+}
+
+.table {
+  min-width: 1000px !important;
+  width: 100%;
+  background: #fff;
+  -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+}
+
+.table thead.thead-primary {
+  background: #99b19c;
+}
+
+.table thead th {
+  vertical-align: middle;
+  border: none;
+  padding: 20px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.table tbody tr {
+  margin-bottom: 10px;
+}
+
+.table tbody th, .table tbody td {
+  border: none;
+  padding: 30px;
+  font-size: 14px;
+  background: #fff;
+  border-bottom: 4px solid #f8f9fd;
+  vertical-align: middle;
+}
+
+.table tbody td.quantity {
+  width: 10%;
+}
+
+.table tbody td .img {
+  width: 100px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.table tbody td .email span {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.table tbody td .email span:last-child {
+  font-size: 14px;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.table tbody td .close span {
+  font-size: 12px;
+  color: #dc3545;
 }

@@ -9,23 +9,28 @@ const DataUpdate = ({ item }) => {
 
   return (
     <tr>
-      <td className="d-flex justify-content-center">
-        <img src={item.image} style={{ width: "100%" }}></img>
+      <td>
+        <img className="img" src={item.image}></img>
       </td>
-      <td><p className="h4">{item.title}</p>
-        <p>{item.description}</p>
-        <p className="mt-5">{item.category}</p></td>
+      <td>
+        <div className="email mb-5">
+          <span>{item.title}</span>
+          <span>{item.description}</span>
+        </div>
+        <span className="category">{item.category}</span>
+      </td>
       <td>
         <input
           type="number"
           placeholder="0"
+          className="quantity form-control"
           min={0}
           value={currentStock}
           onChange={(v) => setCurrentStock(v.target.value)}
         />
       </td>
       <td>
-        <button type="button" class="btn btn-primary" onClick={() => updateStock(item, currentStock)}>
+        <button type="button" class="btn btn-success" onClick={() => updateStock(item, currentStock)}>
           Update
         </button>
       </td>

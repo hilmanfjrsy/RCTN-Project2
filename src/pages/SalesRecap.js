@@ -14,8 +14,8 @@ const SalesRecap = () => {
     }
   }, []);
   return (
-    <div className="container">
-      <h1 className="mb-3 mt-3">Rekap Penjualan</h1>
+    <div className="container-fluid mb-5">
+      <h2 className="mb-3 mt-3">Rekap Penjualan</h2>
       <TableTemplate />
     </div>
   );

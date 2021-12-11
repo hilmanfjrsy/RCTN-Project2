@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import AdminStockLoader from "../components/Loaders/AdminStockLoader";
 import TableTemplate from "../components/TableTemplate";
 import { userSelector } from "../redux/slice/userSlice";
 
@@ -14,8 +15,8 @@ const HomeAdmin = () => {
     }
   }, []);
   return (
-    <div className="container">
-      <h1 className="mb-3 mt-3">Product</h1>
+    <div className="container-fluid mb-5">
+      <h2 className="mb-3 mt-3">Product</h2>
       <TableTemplate />
     </div>
   );
