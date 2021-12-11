@@ -37,15 +37,15 @@ export default function Cart() {
 
     return (
         <div className="bg-cartpage">
-            <div className="container">
-                <div style={{marginBottom: 20, marginTop: 30,display:"flex",}}>
-                    <p style={{marginTop:10,marginRight:20}}><i class="fas fa-shopping-cart fa-lg"></i></p>
-                    <p><h2>My Cart</h2></p>
+            <div className="container-fluid">
+                <div style={{ marginBottom: 20, marginTop: 30, display: "flex", }}>
+                    <p style={{ marginTop: 10, marginRight: 20 }}><i class="fas fa-shopping-cart fa-lg"></i></p>
+                    <h2>My Cart</h2>
                 </div>
                 <div>
-                    <table cellpadding="20" >
+                    <table className="table" >
                         <thead>
-                            <tr>                                
+                            <tr className="bg-dark text-light">
                                 <th>Product Name</th>
                                 <th>Unit Price</th>
                                 <th>Quantity</th>
@@ -55,28 +55,18 @@ export default function Cart() {
                         <tbody>
                             {cart.map((item, index) => <RenderItem item={item} key={index} />)}
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colSpan="2"></th>
-                                <th>TOTAL</th>
-                                <th>${prices}</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
-                <div className="buttonOnCart">
-                <Link to={{ pathname: `/`}}>
+                <div className="buttonOnCart d-flex justify-content-end align-items-center">
+                    <div style={{marginRight:20}}>
+                        <span>TOTAL</span>
+                        <h5 className="price">${prices}</h5>
+                    </div>
                     <button
-                        className="btn btn-warning" style={{marginTop:20,marginRight:20,}}>
-                        Close
+                        onClick={() => checkoutProduct()}
+                        className="btn btn-warning">
+                        Checkout
                     </button>
-                </Link>
-                
-                <button
-                    onClick={() => checkoutProduct()}
-                    className="btn btn-primary" style={{marginTop:20,}}>
-                    Checkout
-                </button>
                 </div>
             </div>
         </div>
@@ -136,8 +126,12 @@ export default function Cart() {
         return (
             <tr>
                 <td>
-                    {item.title}
-                    {isAvailable ? null : <small className="text-danger"><br />*Out of stock</small>}
+                    <div className="email mb-2">
+                        <span>{item.title}</span>
+                        <span>{item.description}</span>
+                    </div>
+                    <span className="category">{item.category}</span>
+                    {isAvailable ? null : <small className="text-danger"><br />*Out of stock ({item.totalStock} left)</small>}
                 </td>
                 <td>${item.price}</td>
                 <td>
@@ -145,6 +139,7 @@ export default function Cart() {
                         type="number"
                         min={0}
                         placeholder="0"
+                        className="quantity form-control"
                         value={countCart}
                         onChange={(v) => { setCountCart(v.target.value); }}
                         onBlur={() => { changeCountCart(countCart) }}

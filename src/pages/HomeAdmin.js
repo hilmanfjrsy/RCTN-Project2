@@ -14,7 +14,7 @@ const HomeAdmin = () => {
     }
   }, []);
   return (
-    <div className="container">
+    <div className="container-fluid">
       <h1 className="mb-3 mt-3">Product</h1>
       <TableTemplate />
     </div>

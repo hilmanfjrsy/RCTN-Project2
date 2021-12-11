@@ -24,7 +24,7 @@ const TableTemplate = () => {
       } else {
         filter = filter.filter((v) => v.totalSales > 0)
         if (filter.length > 0) {
-          let price = filter.map((item) => item.totalPriceSales).reduce((prev, curr) => prev + curr)
+          let price = filter.map((item) => item.totalPriceSales).reduce((prev, curr) => parseFloat(prev) + parseFloat(curr))
           setTotalPrice(price)
         }
       }
@@ -38,7 +38,7 @@ const TableTemplate = () => {
 
   console.log(products)
   return (
-    <table className="table table-striped" style={{ width: "100%" }}>
+    <table className="table">
       <thead className="bg-dark text-light">
         <tr>
           <th>Product</th>
