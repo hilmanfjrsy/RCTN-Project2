@@ -36,7 +36,7 @@ export default function Cart() {
                 if (outStock.length > 0) {
                     toast.warning(outStock.length + " item can't be processed");
                 }
-                setPrices(price);
+                setPrices(price.toFixed(2));
             }
             setCart(filter);
         }
@@ -46,6 +46,12 @@ export default function Cart() {
     useEffect(() => {
         getCart();
     }, [stock]);
+
+    useEffect(() => {
+        window.$(document).ready(function() {
+            window.$('#table').DataTable();
+        } );
+    }, [isFetching]);
 
     return (
         <div className="bg-cartpage">
@@ -60,7 +66,7 @@ export default function Cart() {
                 ) : (
                     <>
                         <div>
-                            <table className="table" >
+                            <table id="table" className="table" >
                                 <thead>
                                     <tr className="bg-dark text-light">
                                         <th>Product Name</th>

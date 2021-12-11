@@ -42,6 +42,12 @@ const TableTemplate = () => {
     getAllProducts();
   }, []);
 
+  useEffect(() => {
+    window.$(document).ready(function () {
+      window.$('#table').DataTable();
+    });
+  }, [isFetching]);
+
   console.log(products);
   return (
     <div>
@@ -68,11 +74,11 @@ const TableTemplate = () => {
           <tbody>
             {pathname === "/home-admin"
               ? products.map((item) => {
-                  return <DataUpdate key={item.id} item={item} />;
-                })
+                return <DataUpdate key={item.id} item={item} />;
+              })
               : products.map((item) => {
-                  return <DataRecap key={item.id} item={item} />;
-                })}
+                return <DataRecap key={item.id} item={item} />;
+              })}
           </tbody>
           <tfoot
             className={pathname === "/home-admin" ? "bg-dark text-light" : null}
@@ -86,9 +92,9 @@ const TableTemplate = () => {
               </tr>
             ) : (
               <tr>
-                <th colSpan="2"></th>
-                <th>TOTAL PENDAPATAN</th>
-                <th>${totalPrice}</th>
+                <th></th>
+                <th colSpan="2">TOTAL PENDAPATAN</th>
+                <th>${totalPrice.toFixed(2)}</th>
               </tr>
             )}
           </tfoot>

@@ -226,16 +226,6 @@ form {
   margin-top: 10px;
 }
 
-.detailquantity {
-  /* display: flex */
-  /* flex-direction: row; */
-  margin-top: 10px;
-
-  height: 30px;
-}
-
-
-
 .detailtitle {
   font-size: 32px;
   font-weight: bold;
@@ -248,7 +238,8 @@ form {
 
 .detaildescription {
   margin-top: 5px;
-  font-size: 20px;
+  font-size: 16px;
+  color: grey;
   text-align: justify;
 }
 
@@ -322,8 +313,9 @@ form {
 }
 
 .table thead th {
+  vertical-align: middle;
   border: none;
-  padding: 30px;
+  padding: 20px 30px;
   font-size: 16px;
   font-weight: bold;
   color: white;
