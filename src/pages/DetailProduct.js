@@ -18,9 +18,8 @@ function Detail() {
     if (token) {
       const data = {
         ...state.detail,
-        countCart: currentStock,
-        totalStock: state.detail.totalStock,
-        totalSales: state.detail.totalSales
+        countCart: parseInt(currentStock) + parseInt(state.detail.countCart),
+        totalSales: 0
       }
       dispatch(addData(data))
       setCurrentStock(0)
