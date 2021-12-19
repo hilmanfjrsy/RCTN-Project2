@@ -52,8 +52,8 @@ export default function CardProduct({ item, index }) {
   function add(item) {
     if (token) {
       const data = {
-        id: item.id,
-        countCart: 1,
+        ...item,
+        countCart: item.countCart + 1,
         totalStock: item.totalStock,
         totalSales: 0
       }

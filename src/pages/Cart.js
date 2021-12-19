@@ -17,30 +17,24 @@ export default function Cart() {
     const [prices, setPrices] = useState(0);
 
     async function getCart() {
-        setIsFetching(true);
-        let res = await getRequest(`products`);
-        if (res.status == 200) {
-            let filter = filterResponse(res.data, stock).filter(
-                (item) => item.countCart > 0
+        // setIsFetching(true);
+        let filter = stock.filter((item) => item.countCart > 0);
+        if (filter.length > 0) {
+            let price = filter.map((item) =>
+                item.countCart > item.totalStock ? 0 : item.totalPriceCart
             );
-            if (filter.length > 0) {
-                let price = filter.map((item) =>
-                    item.countCart > item.totalStock ? 0 : item.totalPriceCart
-                );
-                price = price.reduce(
-                    (prev, curr) => parseFloat(prev) + parseFloat(curr)
-                );
-                let outStock = filter.filter(
-                    (item) => item.countCart > item.totalStock
-                );
-                if (outStock.length > 0) {
-                    toast.warning(outStock.length + " item can't be processed");
-                }
-                setPrices(price.toFixed(2));
+            price = price.reduce(
+                (prev, curr) => parseFloat(prev) + parseFloat(curr)
+            );
+            let outStock = filter.filter(
+                (item) => item.countCart > item.totalStock
+            );
+            if (outStock.length > 0) {
+                toast.warning(outStock.length + " item can't be processed");
             }
-            setCart(filter);
+            setPrices(price);
         }
-        setIsFetching(false);
+        setCart(filter);
     }
 
     useEffect(() => {
@@ -123,7 +117,7 @@ export default function Cart() {
                             data.map((item) => {
                                 dispatch(
                                     checkoutData({
-                                        id: item.id,
+                                        ...item,
                                         countCart: item.countCart,
                                     })
                                 );
@@ -179,7 +173,7 @@ export default function Cart() {
         async function changeCountCart(value) {
             const data = {
                 id: item.id,
-                countCart: parseInt(value) - item.countCart,
+                countCart: parseInt(value),
                 totalStock: item.totalStock,
                 totalSales: item.totalSales,
             };

@@ -11,24 +11,24 @@ export default function Home({ }) {
 
   const stock = useSelector((state) => state.data.data)
 
-  async function getProduct() {
-    setIsFetching(true)
-    let res = await getRequest(`products`);
-    if (res.status == 200) {
-      let filter = filterResponse(res.data, stock)
-      setAllProducts(filter); 
-    }
-    setIsFetching(false)
-  }
+  // async function getProduct() {
+  //   setIsFetching(true)
+  //   let res = await getRequest(`products`);
+  //   if (res.status == 200) {
+  //     let filter = filterResponse(res.data, stock)
+  //     setAllProducts(filter); 
+  //   }
+  //   setIsFetching(false)
+  // }
 
-  useEffect(() => {
-    getProduct();
-  }, [stock]);
+  // useEffect(() => {
+  //   getProduct();
+  // }, [stock]);
 
   return (
     <div className="container-fluid">
       <div className="wrap">
-        {allProducts.map((item, index) => (
+        {stock.map((item, index) => (
           <CardProduct item={item} index={index} key={index} />
         ))}
         {isFetching ? loadData.map((item)=> <CardLoader key={item}/>) : null}

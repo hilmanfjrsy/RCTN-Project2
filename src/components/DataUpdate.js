@@ -38,10 +38,8 @@ const DataUpdate = ({ item }) => {
   )
   function updateStock(item, stock) {
     const data = {
-      id: item.id,
-      countCart: item.countCart,
-      totalStock: stock,
-      totalSales: item.totalSales
+      ...item,
+      totalStock: stock
     }
     dispatch(addData(data))
     toast.success('Stock has been updated')

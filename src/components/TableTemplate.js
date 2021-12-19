@@ -18,23 +18,20 @@ const TableTemplate = () => {
 
   async function getAllProducts() {
     setIsFetching(true);
-    let res = await getRequest("products");
-    if (res.status == 200) {
-      let filter = filterResponse(res.data, stock);
-      if (pathname === "/home-admin") {
-        const outStock = filter.filter((item) => item.totalStock == 0);
-        if (outStock.length > 0) {
-          toast.error(outStock.length + " Product out of stock!");
-        }
-      } else {
-        filter = filter.filter((v) => v.totalSales > 0);
-        if (filter.length > 0) {
-          let price = filter.map((item) => item.totalPriceSales).reduce((prev, curr) => parseFloat(prev) + parseFloat(curr))
-          setTotalPrice(price)
-        }
+    let filter = stock
+    if (pathname === "/home-admin") {
+      const outStock = filter.filter((item) => item.totalStock == 0);
+      if (outStock.length > 0) {
+        toast.error(outStock.length + " Product out of stock!");
       }
-      setProducts(filter);
+    } else {
+      filter = filter.filter((v) => v.totalSales > 0);
+      if (filter.length > 0) {
+        let price = filter.map((item) => item.totalPriceSales).reduce((prev, curr) => parseFloat(prev) + parseFloat(curr))
+        setTotalPrice(price)
+      }
     }
+    setProducts(filter);
     setIsFetching(false);
   }
 
