@@ -101,7 +101,7 @@ export function filterResponse(res = [], stock = []) {
     res.map((item, index) => {
       const newItem = Object.assign({}, item, {
         countCart: 0,
-        totalStock: 0,
+        totalStock: 20,
         totalSales: 0,
         totalPriceCart: 0,
         totalPriceSales: 0
@@ -123,7 +123,7 @@ export function filterResponse(res = [], stock = []) {
     res.map((item, index) => {
       const newItem = Object.assign({}, item, {
         countCart: 0,
-        totalStock: 0,
+        totalStock: 20,
         totalSales: 0,
         totalPriceCart: 0,
         totalPriceSales: 0

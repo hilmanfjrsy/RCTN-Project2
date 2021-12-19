@@ -17,7 +17,7 @@ function Detail() {
   const addToCart = () => {
     if (token) {
       const data = {
-        id: state.detail.id,
+        ...state.detail,
         countCart: currentStock,
         totalStock: state.detail.totalStock,
         totalSales: state.detail.totalSales
